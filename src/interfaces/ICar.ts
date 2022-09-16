@@ -7,3 +7,4 @@ export const ICarZodSchema = IVehicleZodSchema.extend({
 });
 
 export type ICar = z.infer<typeof ICarZodSchema>;
+export type ICarWithId = ICar & { _id: string };
