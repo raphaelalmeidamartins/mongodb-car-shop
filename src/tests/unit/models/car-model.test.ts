@@ -94,7 +94,7 @@ describe('Car model', () => {
     });
 
     it('should throw error if the id is invalid', async () => {
-      expect(model.readOne(invalidMongoId))
+      expect(model.delete(invalidMongoId))
         .to.eventually.be
         .rejectedWith(ErrorTypes.InvalidMongoId);
     });
