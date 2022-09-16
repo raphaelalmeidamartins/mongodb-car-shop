@@ -1,15 +1,16 @@
 import { isValidObjectId, Model as MongoModel } from 'mongoose';
+import { ErrorTypes } from '../helpers/ErrorCatalog';
 import { IModel } from '../interfaces/IModel';
 
 abstract class Model<Entity> implements IModel<Entity> {
   constructor(protected _repository: MongoModel<Entity>) {}
 
-  public async create(data: Entity): Promise<Entity> {
-    return this._repository.create({ ...data });
+  protected static validateId(_id: string): void {
+    if (!isValidObjectId(_id)) throw new Error(ErrorTypes.InvalidMongoId);
   }
 
-  protected static validateId(_id: string): void {
-    if (!isValidObjectId(_id)) throw new Error('InvalidMongoId');
+  public async create(data: Entity): Promise<Entity> {
+    return this._repository.create({ ...data });
   }
 
   public async read(): Promise<Entity[]> {
