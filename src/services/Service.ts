@@ -33,6 +33,7 @@ abstract class Service<Entity> implements IService<Entity> {
   }
 
   public async delete(_id: string): Promise<Entity | null> {
+    await this.readOne(_id);
     return this._model.delete(_id);
   }
 }
