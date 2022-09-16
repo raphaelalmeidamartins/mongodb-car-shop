@@ -36,23 +36,6 @@ export const notFoundId = '6324bd35973976f63aa51906';
 
 export const invalidMongoId = 'a';
 
-export const coverageCar = {
-  model: 'Uno da Escada',
-  year: 1963,
-  color: 'red',
-  buyValue: 3500,
-  seatsQty: 2,
-  doorsQty: 2,
-};
-
-export const noModelCar = {
-  year: 1963,
-  color: 'red',
-  buyValue: 3500,
-  seatsQty: 2,
-  doorsQty: 2,
-};
-
 /* Invalid request bodies */
 
 export const invalidModel: ICar = {
