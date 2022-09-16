@@ -8,8 +8,11 @@ import StatusCodes from '../../../helpers/StatusCodes';
 import Car from '../../../models/Car';
 import CarService from '../../../services/CarService';
 import {
+  collection,
+  updatedDocument,
+  updatedDocumentWithId,
   validDocument,
-  validDocumentWithId
+  validDocumentWithId,
 } from '../../mocks/Car';
 const { expect } = chai;
 
@@ -25,6 +28,10 @@ describe('Car controller', () => {
 
   before(async () => {
     sinon.stub(service, 'create').resolves(validDocumentWithId);
+    sinon.stub(service, 'read').resolves(collection);
+    sinon.stub(service, 'readOne').resolves(validDocumentWithId);
+    sinon.stub(service, 'update').resolves(updatedDocumentWithId);
+    sinon.stub(service, 'delete').resolves(validDocumentWithId);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -44,6 +51,52 @@ describe('Car controller', () => {
         .calledWith(StatusCodes.Created)).to.be.true;
       expect((res.json as sinon.SinonStub)
         .calledWith(validDocumentWithId)).to.be.true;
+    });
+  });
+
+  describe('#list', () => {
+    it('should return status 200 with the all the available documents', async () => {
+      await controller.list(req, res);
+
+      expect((res.status as sinon.SinonStub)
+        .calledWith(StatusCodes.Ok)).to.be.true;
+      expect((res.json as sinon.SinonStub)
+        .calledWith(collection)).to.be.true;
+    });
+  });
+
+  describe('#getById', () => {
+    it('should return status 200 with the document corresponding to the provided id', async () => {
+      req.params = { id: validDocumentWithId._id};
+      await controller.getById(req, res);
+
+      expect((res.status as sinon.SinonStub)
+        .calledWith(StatusCodes.Ok)).to.be.true;
+      expect((res.json as sinon.SinonStub)
+        .calledWith(validDocumentWithId)).to.be.true;
+    });
+  });
+
+  describe('#update', () => {
+    it('should return status 200 with the updated document', async () => {
+      req.body = updatedDocument;
+      req.params = { id: validDocumentWithId._id};
+      await controller.update(req, res);
+
+      expect((res.status as sinon.SinonStub)
+        .calledWith(StatusCodes.Ok)).to.be.true;
+      expect((res.json as sinon.SinonStub)
+        .calledWith(updatedDocumentWithId)).to.be.true;
+    });
+  });
+
+  describe('#delete', () => {
+    it('should return status 204 with the document is deleted succesfully', async () => {
+      req.params = { id: validDocumentWithId._id};
+      await controller.delete(req, res);
+
+      expect((res.sendStatus as sinon.SinonStub)
+        .calledWith(StatusCodes.NoContent)).to.be.true;
     });
   });
 });
