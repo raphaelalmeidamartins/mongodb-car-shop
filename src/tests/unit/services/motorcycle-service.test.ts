@@ -2,20 +2,17 @@ import chai, { use } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import * as sinon from 'sinon';
 import { ErrorTypes } from '../../../helpers/ErrorCatalog';
-import Car from '../../../models/Car';
-import CarService from '../../../services/CarService';
+import Motorcycle from '../../../models/Motorcycle';
+import MotorcycleService from '../../../services/MotorcycleService';
 import {
   collection,
   emptyCollection,
   invalidBuyValue,
   invalidColor,
-  invalidDoorsQty1,
-  invalidDoorsQty2,
-  invalidDoorsQty3,
   invalidModel,
-  invalidSeatsQty1,
-  invalidSeatsQty2,
-  invalidSeatsQty3,
+  invalidEngineCapacity1,
+  invalidEngineCapacity2,
+  invalidEngineCapacity3,
   invalidYear1,
   invalidYear2,
   invalidYear3,
@@ -24,14 +21,14 @@ import {
   updatedDocumentWithId,
   validDocument,
   validDocumentWithId
-} from '../../mocks/Car';
+} from '../../mocks/Motorcycle';
 const { expect } = chai;
 
 use(chaiAsPromised);
 
-describe('Car service', () => {
-  const model = new Car();
-  const service = new CarService(model);
+describe('Motorcycle service', () => {
+  const model = new Motorcycle();
+  const service = new MotorcycleService(model);
 
   before(async () => {
     sinon.stub(model, 'create').resolves(validDocumentWithId);
@@ -53,10 +50,7 @@ describe('Car service', () => {
       .onCall(11).resolves(validDocumentWithId)
       .onCall(12).resolves(validDocumentWithId)
       .onCall(13).resolves(validDocumentWithId)
-      .onCall(14).resolves(validDocumentWithId)
-      .onCall(15).resolves(validDocumentWithId)
-      .onCall(16).resolves(validDocumentWithId)
-      .onCall(17).resolves(null);
+      .onCall(14).resolves(null);
     sinon.stub(model, 'update').resolves(updatedDocumentWithId);
     sinon.stub(model, 'delete').resolves(validDocumentWithId);
   });
@@ -101,33 +95,18 @@ describe('Car service', () => {
         .to.eventually.be.rejected;
     });
 
-    it('should throw error if the doorsQty is less than 2', () => {
-      expect(service.create(invalidDoorsQty1))
+    it('should throw error if the engineCapacity is less than 2', () => {
+      expect(service.create(invalidEngineCapacity1))
         .to.eventually.be.rejected;
     });
 
-    it('should throw error if the doorsQty is greater than 4', () => {
-      expect(service.create(invalidDoorsQty2))
+    it('should throw error if the engineCapacity is greater than 7', () => {
+      expect(service.create(invalidEngineCapacity2))
         .to.eventually.be.rejected;
     });
 
-    it('should throw error if the doorsQty is not an interger', () => {
-      expect(service.create(invalidDoorsQty3))
-        .to.eventually.be.rejected;
-    });
-
-    it('should throw error if the seatsQty is less than 2', () => {
-      expect(service.create(invalidSeatsQty1))
-        .to.eventually.be.rejected;
-    });
-
-    it('should throw error if the seatsQty is greater than 7', () => {
-      expect(service.create(invalidSeatsQty2))
-        .to.eventually.be.rejected;
-    });
-
-    it('should throw error if the seatsQty is not an interger', () => {
-      expect(service.create(invalidSeatsQty3))
+    it('should throw error if the engineCapacity is not an interger', () => {
+      expect(service.create(invalidEngineCapacity3))
         .to.eventually.be.rejected;
     });
   });
@@ -199,33 +178,18 @@ describe('Car service', () => {
         .to.eventually.be.rejected;
     });
 
-    it('should throw error if the doorsQty is less than 2', () => {
-      expect(service.update(validDocumentWithId._id, invalidDoorsQty1))
+    it('should throw error if the engineCapacity is less than 2', () => {
+      expect(service.update(validDocumentWithId._id, invalidEngineCapacity1))
         .to.eventually.be.rejected;
     });
 
-    it('should throw error if the doorsQty is greater than 4', () => {
-      expect(service.update(validDocumentWithId._id, invalidDoorsQty2))
+    it('should throw error if the engineCapacity is greater than 7', () => {
+      expect(service.update(validDocumentWithId._id, invalidEngineCapacity2))
         .to.eventually.be.rejected;
     });
 
-    it('should throw error if the doorsQty is not an interger', () => {
-      expect(service.update(validDocumentWithId._id, invalidDoorsQty3))
-        .to.eventually.be.rejected;
-    });
-
-    it('should throw error if the seatsQty is less than 2', () => {
-      expect(service.update(validDocumentWithId._id, invalidSeatsQty1))
-        .to.eventually.be.rejected;
-    });
-
-    it('should throw error if the seatsQty is greater than 7', () => {
-      expect(service.update(validDocumentWithId._id, invalidSeatsQty2))
-        .to.eventually.be.rejected;
-    });
-
-    it('should throw error if the seatsQty is not an interger', () => {
-      expect(service.update(validDocumentWithId._id, invalidSeatsQty3))
+    it('should throw error if the engineCapacity is not an interger', () => {
+      expect(service.update(validDocumentWithId._id, invalidEngineCapacity3))
         .to.eventually.be.rejected;
     });
   });
