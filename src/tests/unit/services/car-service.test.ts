@@ -42,9 +42,21 @@ describe('Car service', () => {
       .onCall(0).resolves(validDocumentWithId)
       .onCall(1).resolves(null)
       .onCall(2).resolves(validDocumentWithId)
-      .onCall(3).resolves(null)
+      .onCall(3).resolves(validDocumentWithId)
       .onCall(4).resolves(validDocumentWithId)
-      .onCall(5).resolves(null);
+      .onCall(5).resolves(validDocumentWithId)
+      .onCall(6).resolves(validDocumentWithId)
+      .onCall(7).resolves(validDocumentWithId)
+      .onCall(8).resolves(validDocumentWithId)
+      .onCall(9).resolves(validDocumentWithId)
+      .onCall(10).resolves(validDocumentWithId)
+      .onCall(11).resolves(validDocumentWithId)
+      .onCall(12).resolves(validDocumentWithId)
+      .onCall(13).resolves(validDocumentWithId)
+      .onCall(14).resolves(validDocumentWithId)
+      .onCall(15).resolves(validDocumentWithId)
+      .onCall(16).resolves(validDocumentWithId)
+      .onCall(17).resolves(null);
     sinon.stub(model, 'update').resolves(updatedDocumentWithId);
     sinon.stub(model, 'delete').resolves(validDocumentWithId);
   });
@@ -203,7 +215,7 @@ describe('Car service', () => {
     });
 
     it('should throw error if the seatsQty is less than 2', () => {
-      expect(service.create(invalidSeatsQty1))
+      expect(service.update(validDocumentWithId._id, invalidSeatsQty1))
         .to.eventually.be.rejected;
     });
 
@@ -225,7 +237,7 @@ describe('Car service', () => {
     });
 
     it('should throw error if there is no document with the provided id', async () => {
-      expect(service.readOne(notFoundId))
+      expect(service.delete(notFoundId))
         .to.eventually.be
         .rejectedWith(ErrorTypes.EntityNotFound);
     });
