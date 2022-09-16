@@ -8,7 +8,7 @@ abstract class Controller<Entity> implements IController {
     this.register = this.register.bind(this);
   }
 
-  public async register(req: Request, res: Response, _next: NextFunction): Promise<void> {
+  public async register(req: Request, res: Response, _next?: NextFunction): Promise<void> {
     const document = await this._service.create(req.body);
 
     res.status(StatusCodes.Created).json(document);
