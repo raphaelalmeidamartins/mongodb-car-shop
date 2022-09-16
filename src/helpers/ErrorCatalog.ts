@@ -16,11 +16,11 @@ export type ErrorCatalog = {
 
 export const errorCatalog: ErrorCatalog = {
   EntityNotFound: {
-    message: 'Entity not found',
+    message: 'Object not found',
     httpStatus: StatusCodes.NotFound,
   },
   InvalidMongoId: {
-    message: 'Id must be a 24 characters hexadecimal',
+    message: 'Id must have 24 hexadecimal characters',
     httpStatus: StatusCodes.BadRequest,
   },
 };
