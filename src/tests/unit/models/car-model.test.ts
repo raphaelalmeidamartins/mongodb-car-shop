@@ -5,7 +5,15 @@ import { Model as MongoModel } from 'mongoose';
 import * as sinon from 'sinon';
 import { ErrorTypes } from '../../../helpers/ErrorCatalog';
 import Car from '../../../models/Car';
-import { collection, emptyCollection, updatedDocument, updatedDocumentWithId, validDocument, validDocumentWithId } from '../../mocks/Car';
+import {
+  collection,
+  emptyCollection,
+  invalidMongoId,
+  updatedDocument,
+  updatedDocumentWithId,
+  validDocument,
+  validDocumentWithId
+} from '../../mocks/Car';
 const { expect } = chai;
 
 use(chaiAsPromised);
@@ -60,7 +68,7 @@ describe('Car model', () => {
     });
 
     it('should throw error if the id is invalid', async () => {
-      expect(model.readOne(validDocumentWithId._id))
+      expect(model.readOne(invalidMongoId))
         .to.eventually.be
         .rejectedWith(ErrorTypes.InvalidMongoId);
     });
@@ -73,7 +81,7 @@ describe('Car model', () => {
     });
 
     it('should throw error if the id is invalid', async () => {
-      expect(model.readOne(validDocumentWithId._id))
+      expect(model.update(invalidMongoId, updatedDocument))
         .to.eventually.be
         .rejectedWith(ErrorTypes.InvalidMongoId);
     });
@@ -86,7 +94,7 @@ describe('Car model', () => {
     });
 
     it('should throw error if the id is invalid', async () => {
-      expect(model.readOne(validDocumentWithId._id))
+      expect(model.readOne(invalidMongoId))
         .to.eventually.be
         .rejectedWith(ErrorTypes.InvalidMongoId);
     });
