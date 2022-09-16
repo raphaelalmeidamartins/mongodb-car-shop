@@ -8,6 +8,8 @@ abstract class Controller<Entity> implements IController {
     this.register = this.register.bind(this);
     this.list = this.list.bind(this);
     this.getById = this.getById.bind(this);
+    this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   public async register(req: Request, res: Response, _next?: NextFunction): Promise<void> {
@@ -26,6 +28,18 @@ abstract class Controller<Entity> implements IController {
     const document = await this._service.readOne(req.params.id);
 
     res.status(StatusCodes.Ok).json(document);
+  }
+
+  public async update(req: Request, res: Response, _next?: NextFunction): Promise<void> {
+    const document = await this._service.update(req.params.id, req.body);
+
+    res.status(StatusCodes.Ok).json(document);
+  }
+
+  public async delete(req: Request, res: Response, _next?: NextFunction): Promise<void> {
+    await this._service.delete(req.params.id);
+
+    res.sendStatus(StatusCodes.NoContent);
   }
 }
 
