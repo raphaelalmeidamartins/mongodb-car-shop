@@ -85,7 +85,7 @@ git clone git@github.com:raphaelalmeidamartins/mongodb-car-shop.git && cd mongod
 docker-compose up -d --buid
 ```
 
-### , - Access the documentation and make requests to the server running on the port 3001
+### 3 - Access the documentation and make requests to the server running on the port 3001
 
 Access the route http://localhost:3001/docs/en to see the English documentation and try the API. If you prefer, you can use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
 
@@ -107,7 +107,7 @@ git clone git@github.com:raphaelalmeidamartins/mongodb-car-shop.git && cd mongod
 docker-compose up -d --build
 ```
 
-### 6 - Acesse a documentação e faça requisições para o servidor aberto na porta 3001
+### 3 - Acesse a documentação e faça requisições para o servidor aberto na porta 3001
 
 Acesse a rota http://localhost:3001/docs/br para acessar a documentação em português e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
 <br />
