@@ -1,0 +1,18 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Trybesmith",
+    "description": "This is a API to a vehicle store. It's possible to register, update, delete and list venhicles. Note: this documentation is still under development",
+    "contact": {
+      "email": "raphael.almeida.martins@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "test API"
+    }
+  ],
+  "paths": {}
+}
